@@ -1,0 +1,2 @@
+class ActivityPagesController < ApplicationController
+end

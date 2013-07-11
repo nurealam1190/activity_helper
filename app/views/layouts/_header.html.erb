@@ -1,0 +1,21 @@
+ <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+           <%= link_to image_tag('app.png', height: 235, width: 235, class: "photo"), '#',class: "mylogo", id: "logo" %>
+          
+            
+              <ul class="nav pull-right">
+                 <li> 
+                  <%= form_tag "#", :class=>"form-search" do %>
+                  <%= text_field_tag 'search-box', nil, :class=>"input-medium search-query", placeholder: 'search here' %>
+                  <%= submit_tag  'search', :id=>"submit" %>
+                  <%end%></li>
+
+                <li><%= link_to "Register/Sign-up", '#' %></li>
+                <li><%= link_to "Activity", activity_path %></li>
+                <li><%= link_to "Login",    '#' %></li>
+              </ul>
+          
+        </div>
+      </div>
+  </header>
