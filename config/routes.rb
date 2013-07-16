@@ -7,11 +7,18 @@ ActivityHelper::Application.routes.draw do
   end     
 
   resources :users 
+  
+  
+  resources :activity_pages, only: [:new,:create]
+  #get '/:name' => 'users#show', :constrain => { :name => /[a-zA-Z]+/}
+  #match '/activities', to: 'activities#create', via: [:POST]
+  get "activity_pages/home"
+  #get "activity_pages/activity"
+  match '/:id' => 'users#show', via:[:get]
 
-   get "activity_pages/home"
-   match '/activity', to: 'activity_pages#activity', via: [:get]
-   match '/users', to: 'users#show', via: [:get]
-   root :to => 'activity_pages#home'
+  match '/activity_pages/activity', to: 'activity_pages#activity', via: [:get]
+  
+  root :to => 'activity_pages#home'
    #get "activity_pages/activity"
   # The priority is based upon order of creation:
   # first created -> highest priority.

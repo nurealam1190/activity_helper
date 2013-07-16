@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "user"  do
   	before do 
-  	   @user = User.new(name: "exampleuser", email: "user@example.com", password: "foobarcom", password_confirmation: "foobarcom")
+  	   @user = User.new(name: "exampleuser", username: 'noor', email: "user@example.com", password: "foobarcom", password_confirmation: "foobarcom")
     end
   	  subject { @user }
 
@@ -10,19 +10,21 @@ describe "user"  do
   it { should respond_to(:password)}
 	it { should respond_to(:password_confirmation)}
 	it { should respond_to(:name) }
+  it { should respond_to(:activities)}
+  it { should respond_to(:username)}
 
 	it { should be_valid }
 
-	describe " when name is not present" do
-		before { @user.name = " " }
+	describe " when username is not present" do
+		before { @user.username = " " }
 	    it { should_not be_valid}
 	end
 	describe " when email is not present" do 
 		before { @user.email = " "}
 		it { should_not be_valid}
 	end
-	describe " when name is too long " do 
-		before { @user.name = 'a'*51 }
+	describe " when username is too long " do 
+		before { @user.username = 'a'*31 }
 		it { should_not be_valid}
 	end
   describe "when password is not present" do
@@ -68,6 +70,29 @@ describe "user"  do
       user_with_same_email.save
     end
       it { should_not be_valid }
+  end
+  describe "activity associations" do
+
+    before { @user.save }
+    let!(:older_activity) do 
+      FactoryGirl.create(:activity, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_activity) do
+      FactoryGirl.create(:activity, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right activity in the right order" do
+      @user.activities.should == [newer_activity, older_activity]
+    end
+  end
+  it "should destroy associated activity" do
+      activities = @user.activities.dup
+      @user.destroy
+      #microposts.should_not be_empty
+
+      activities.each do |activity|
+        Activity.find_by_id(activity.id).should be_nil
+      end
   end
   
 

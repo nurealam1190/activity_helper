@@ -1,12 +1,49 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, @user.username) %>
 <div class="row">
 	<aside class="span4">
 		<section>
-			<h1>
+			<h3>
 				<%= gravatar_for @user %>
-				<%= @user.name %>
+				<%= @user.username %>
 				
-			</h1>
+				
+			</h3>
+			The user contains <%= pluralize(@user.activities.count, "activity") %>
 		</section>
 	</aside>
-</div>
+	</div>
+
+	<% @activities.each do |activity|%>
+      
+        <div class="span12 offset2 ">
+                  <div class="row">
+                       <div class="span2">
+                          <%= gravatar_for @user%>
+
+                           <%=link_to @user.username, user_path(current_user) %>
+
+                       </div>
+
+                       <div class="span4">
+                          
+                             <ol><h4>Category:</h4> <%=activity.category%></ol>
+
+                             <ol><h4>Name:</h4> <%= activity.name%></ol>
+
+
+                       </div>
+                       <ol><h4>Description:</h4> <%=activity.description%></ol>
+                  
+                  </div>
+                  Posted <%= time_ago_in_words(activity.created_at) %> ago.
+        </div> 
+        <%= will_paginate @activities %>       
+                  
+        
+
+        
+        <%end%>
+        
+     
+	 
+

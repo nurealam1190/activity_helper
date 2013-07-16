@@ -25,6 +25,75 @@
 	
 	margin-top:30px;
 	text-decoration: none;
-	font-size:1.7em;
+	font-size:15px;
 }
+
+.new-activity-form{
+	
+	width:100%;
+	textarea{
+		width:95%;
+		padding-top:15px;
+		margin-top:20px;
+	}
+
+}
+
+.custom-select{
+	width:50%;
+	float:left;
+	label{
+		width:50%;
+	}
+}
+
+.custom-input{
+	width:50%;
+	float:right;
+}
+.descript{
+	width: 400px;
+}
+.span12{
+	margin-top: 46px;
+	border:2px solid red;
+	height:150px;
+	background-color:cyan;
+	color:blue;
+}
+.span2{
+	
+	height: 150px;
+	
+	
+}
+.span4{
+	
+	height: 150px;
+	padding-left: 0px;
+	
+}
+.extra{
+	height: 0px;
+	width:100%;
+}
+.hero-unit{
+	margin-left:180px;
+	margin-right:316px;
+}
+.profile-pic{
+	margin-left: 0px;
+	margin-top: 0px;
+	
+	width:100px;
+	height:100px;
+}
+.image{
+	width:100px;
+	height:20px;
+	margin-top:0px;
+	
+}
+
+
 

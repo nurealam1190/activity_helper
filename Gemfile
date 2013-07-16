@@ -11,6 +11,8 @@ gem 'therubyracer'
 gem 'devise', '3.0.0.rc'
 gem 'protected_attributes'
 gem 'factory_girl_rails'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 
 
