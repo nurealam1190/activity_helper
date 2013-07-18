@@ -47,7 +47,7 @@
         end
         
 
-         describe "with invalid information" do
+         describe "with invalid information", :js=>true do
 
             it "should not create a activity" do
               expect { click_button "Post" }.not_to change(Activity, :count)
@@ -58,17 +58,17 @@
               end
           end
 
-        describe "with valid information" do
+        describe "with valid information", :js=>true do
 
             before do 
               select "Sports", from: "Category"
              fill_in "Name", with: "cricket" 
-             
              fill_in "Description", with: "hi"
+             click_button "Post"
            end
-            it "should create a activity" do
-               expect { click_button "Post" }.to change(Activity, :count).by(1)
-            end
+            it { should have_content("cricket") }
+               # expect { click_button "Post" }.to change(Activity, :count).by(1)
+            # end
         end
     end
 

@@ -4,8 +4,12 @@ class UsersController < ApplicationController
 
 
 	def show
-		@user = User.find_by_username(params[:id])
-		@activities=@user.activities.paginate(page: params[:page])
+		if @user = User.find_by_username(params[:id])
+		  @activities=@user.activities.paginate(page: params[:page])
+    else
+      flash[:notice] = "Sorry! The page you requestes does not exist"
+      redirect_to root_url
+    end
 	end
   
   private

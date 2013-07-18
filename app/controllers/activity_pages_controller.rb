@@ -1,23 +1,46 @@
 class ActivityPagesController < ApplicationController
-	#before_filter :signed_in_user
+  respond_to :html, :xml, :json
+	#before_filter :signed_in_user?, only: [:create]
+  #  def signed_in_user
+  #     unless signed_in?
+  # #     #store_location
+  #     redirect_to signin_url, notice: "Please sign in." 
+  #  end
 
 	def home
 		
 		 @activity = current_user.activities.build if signed_in?
-     @oldactivity = Activity.paginate(page: params[:page])
+     @activities = Activity.paginate(page: params[:page])
 
-     #@user=
+     
 	end
 	#before_filter :signed_in_user
 
   def create
     @activity = current_user.activities.build(params[:activity])
     if @activity.save
-      flash[:success] = "Activity created!"
-      redirect_to root_url
-    else
-      @oldactivity = Activity.paginate(page: params[:page])
-      render 'activity_pages/home'
+      @activities=Activity.paginate(page: params[:page])
+      respond_with do |format|
+        format.html do 
+          if request.xhr?
+
+            render partial: 'activity', layout: false, status: :created, locals: {nures: @activities}
+          
+          end
+        end
+      end
+       
+     else
+        respond_with do |format|
+          format.html do 
+          if request.xhr?
+            render partial: 'new_post_form', layout: false, status: :error, locals: {activity: @activity }
+          
+          end
+
+        end
+      end
+      
     end
   end
 
@@ -28,3 +51,5 @@ class ActivityPagesController < ApplicationController
   
 
 end
+
+

@@ -14,11 +14,13 @@ ActivityHelper::Application.routes.draw do
   #match '/activities', to: 'activities#create', via: [:POST]
   get "activity_pages/home"
   #get "activity_pages/activity"
-  match '/:id' => 'users#show', via:[:get]
 
   match '/activity_pages/activity', to: 'activity_pages#activity', via: [:get]
   
   root :to => 'activity_pages#home'
+
+  match '/:id' => 'users#show', via:[:get]
+  
    #get "activity_pages/activity"
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,39 @@
+
+<div class="activity_partial">
+   <%= will_paginate nures %>
+
+    <% nures.each do |rahul|%>
+      
+        <div class="span12 offset2 ">
+                  <div class="row">
+                       <div class="span2">
+                          <%= gravatar_for rahul.user%>
+
+                           <%=link_to rahul.user.username, rahul.user %>
+
+                       </div>
+
+                       <div class="span4">
+                             <ol><h4>Category:</h4> <%=rahul.category%></ol>
+                              <ol><h4>Name:</h4> <%= rahul.name%></ol>
+
+                       </div>
+                       <ol><h4>Description:</h4> <%=rahul.description%></ol>
+                  
+                    </div>
+                  Posted <%= time_ago_in_words(rahul.created_at) %> ago.
+                 
+        </div> 
+    <%end%>
+</div>
+
+
+
+
+
+
+
+
+
+
+
