@@ -1,0 +1,11 @@
+<div class="comment-show"
+	<% if rahul.comments.any? %>
+        <% rahul.comments.each do |comment| %>
+            <div class="user-comment">
+        
+                <%= comment.content %>
+            </div>
+        <%end%>
+    <%end%>
+</div>
+

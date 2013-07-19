@@ -35,6 +35,14 @@ describe "Activity" do
     before { @activity.description = " " }
     it { should_not be_valid }
   end
+  describe "with blank category" do
+    before { @activity.category = " " }
+    it { should_not be_valid }
+  end
+  describe "with blank name" do
+    before { @activity.name = " " }
+    it { should_not be_valid }
+  end
 
   describe "with description that is too long" do
     before { @activity.description = "a" * 201 }

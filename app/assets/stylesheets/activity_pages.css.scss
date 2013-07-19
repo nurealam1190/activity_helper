@@ -55,7 +55,8 @@
 	width: 400px;
 }
 .span12{
-	margin-top: 46px;
+   clear:both;
+	margin-top: 70px;
 	border:2px solid red;
 	height:150px;
 	background-color:cyan;
@@ -93,6 +94,23 @@
 	height:20px;
 	margin-top:0px;
 	
+}
+.comment-form{
+    height: 15px;
+	width: 100%;
+	display: none;
+
+	input[type="text"]{
+	width:98.3%;
+	}
+}
+.comment-show{
+clear:both;
+    margin-top:20px;
+	height:20px;
+	width:100%;
+	background-color:gray;
+	color:black;
 }
 
 

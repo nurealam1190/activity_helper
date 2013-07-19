@@ -6,10 +6,14 @@ ActivityHelper::Application.routes.draw do
       get "/users/sign_out" => "devise/sessions#destroy"
   end     
 
-  resources :users 
+  resources :users do 
   
   
-  resources :activity_pages, only: [:new,:create]
+        resources :activity_pages, only: [:new,:create] do 
+
+          resources :comments, only: [:new, :create, :show]
+        end
+  end
   #get '/:name' => 'users#show', :constrain => { :name => /[a-zA-Z]+/}
   #match '/activities', to: 'activities#create', via: [:POST]
   get "activity_pages/home"

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:edit, :destroy]
 
-
+   
 
 	def show
 		if @user = User.find_by_username(params[:id])

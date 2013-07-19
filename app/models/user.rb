@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :activities
+  has_many :comments
 
   def to_param
     username

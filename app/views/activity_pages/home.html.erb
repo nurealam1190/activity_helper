@@ -19,12 +19,14 @@
 </div>
 
   <div class="activities">
-       
+  <%= will_paginate @activities %>
+  <% @activities.each do |rahul|%>
 
-  <%= render partial: 'activity_pages/activity', locals: { nures: @activities} %>
-
+  <%= render partial: 'activity_pages/activity', locals: { nures: rahul} %>
+<% end %>
        
   </div>
+  
 
 
      

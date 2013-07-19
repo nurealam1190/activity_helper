@@ -8,9 +8,11 @@ class ActivityPagesController < ApplicationController
   #  end
 
 	def home
-		
+		 
 		 @activity = current_user.activities.build if signed_in?
      @activities = Activity.paginate(page: params[:page])
+     @comment=Comment.new
+     @comments=Comment.all
 
      
 	end
@@ -24,7 +26,7 @@ class ActivityPagesController < ApplicationController
         format.html do 
           if request.xhr?
 
-            render partial: 'activity', layout: false, status: :created, locals: {nures: @activities}
+            render partial: 'activity', layout: false, status: :created, locals: {nures: @activities.first}
           
           end
         end

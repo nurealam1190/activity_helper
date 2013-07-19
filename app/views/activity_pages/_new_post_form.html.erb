@@ -1,5 +1,5 @@
 <div class="hello">
-    <%= form_for([current_user,activity],url:activity_pages_path, remote: true , html: {id: "create_activity_form"}) do |f| %>
+    <%= form_for :activity,url: user_activity_pages_path(current_user), remote: true , html: {id: "create_activity_form"} do |f| %>
            <%= render partial:'shared/error_messages', locals:{ activity: activity } %>
               <div class="custom-select">
                       <%= f.label :category %>   
