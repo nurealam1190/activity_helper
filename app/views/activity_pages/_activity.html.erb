@@ -1,39 +1,50 @@
   <div class="activity_partial">
       
         <div class="span12 offset2 ">
-                  <div class="row">
-                       <div class="span2">
-                          <%= gravatar_for nures.user%>
+          <div class="row">
+            <div class="span2">
+                <%= link_to (gravatar_for nures.user), nures.user%>
 
-                           <%=link_to nures.user.username, nures.user %>
+                <%=link_to nures.user.username, nures.user %>
+            </div>
+            <div class="span4">
+              <ol><h4>Category:</h4> <%=nures.category%></ol>
+              <ol><h4>Name:</h4> <%= nures.name%></ol>
+            </div>
 
-                       </div>
+               <ol><h4>Description:</h4> <%=nures.description%></ol>
+          </div>
+          <div class="row">
+            <div class="comment-class">
+              Posted <%= time_ago_in_words(nures.created_at) %> ago.
 
-                       <div class="span4">
-                             <ol><h4>Category:</h4> <%=nures.category%></ol>
-                              <ol><h4>Name:</h4> <%= nures.name%></ol>
+              <%= link_to "comment", '#', class: "click-link", remote:true%>
+            </div>
+          </div>
+          <div class="row">
 
-                       </div>
-                  
-                       <ol><h4>Description:</h4> <%=nures.description%></ol>
-                  </div>
-                    
-                  Posted <%= time_ago_in_words(nures.created_at) %> ago.
-                  <%= link_to "comment", '#', class: "click-link", remote:true%>
-                 
+            <div class="comment-create">
+
+             
+                  <% if nures.comments.any? %>
+                    <% nures.comments.each do |comment| %>
+                                 
+                      <%= render partial: 'comments/comment', locals: { comment: comment } %>
+                    <%end%>
+                  <%end%>
+               <div class="comm-form">
+            
+              <%= render partial: 'comments/new_comment', locals: { rahul: nures, comment:comment} %>
+          
+             </div>
+           
                
-                  <div class="comm-form">
-                    <%= render partial: 'comments/new_comment', locals: { rahul: nures} %>
-                  </div>
+            </div>
 
-                  <div class="comment-create">
 
-                    <%= render partial: 'comments/comment', locals: { rahul: nures} %>
-                  </div>
-               
-                   
-                 
-        </div> 
+          </div>
+       </div> 
+         
 
 
 </div>

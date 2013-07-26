@@ -1,11 +1,14 @@
-<div class="comment-show"
-	<% if rahul.comments.any? %>
-        <% rahul.comments.each do |comment| %>
-            <div class="user-comment">
-        
-                <%= comment.content %>
-            </div>
-        <%end%>
-    <%end%>
+<div class="abc">
+    <%=link_to (gravatar_for comment.user), comment.user%>
+    <span class="commentor">by-<%= comment.user.username%>: :
+     <%= time_ago_in_words(comment.created_at) %> ago: :
+    </span>
+	<%= comment.content %>
 </div>
+	     
+            
+	              
+	    
+      
+
 

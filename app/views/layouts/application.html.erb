@@ -13,7 +13,7 @@
           signed in as <%= current_user.email %>.Not you?
           <%= link_to "sign out", destroy_user_session_path %>
         <% else %>
-        <% link_to "sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+        
         <% end% %>
       </div>
     </div>
@@ -21,14 +21,17 @@
 	
 	
  <%= render 'layouts/header' %>
- <%flash.each do |name, msg|%>
-	<%= content_tag :div,msg, :id=> "flash#{name}" %>
-	<%end%>
+
+     <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+    <% end %>
+ 
  
  <!-- <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>-->
 
-<%= yield %>
+    <%= yield %>
+
 
 </body>
 </html>

@@ -1,0 +1,65 @@
+<% provide(:title, '| all-users') %>
+ 
+ 
+     <div class="list-user">List of All users</div><hr>
+    <% @user.each do |user|%>
+  <%if user !=current_user%>
+
+    <div class="span12 offset2 ">
+        <div class="row">
+            <div class="span2">
+
+               <%=link_to (gravatar_for user), user%><br><br><br>
+                <div class="cent"><%=link_to (user.username), user%></div>
+
+
+            </div>
+            <div class="span4">
+              
+                 <br><br><br><div class="center center-all"><%=user.email%></div>
+
+            </div>
+                <br><br><br><div class="center">
+                <%if signed_in? %>
+                   <span class="ab1">    
+
+			        <%if current_user.friendships.find_by_friend_id(user.id) %>
+			            <%if current_user.friendships.find_by_friend_id(user.id).status == FALSE%>
+			               <span class="label label-warning">request already sent</span>
+
+			            <%else%>
+			               
+			               <span class="label label-warning">friends</span>
+			               
+
+			            <%end%>      
+			        <%elsif current_user.inverse_friendships.find_by_user_id(user.id) %>
+			            <%if current_user.inverse_friendships.find_by_user_id(user.id).status == FALSE%>
+			               <div class="btn btn-primary"> request already sent</div>
+			            <%else%>
+			               
+			                <span class="label label-warning">friends</span>
+			               
+			            <%end%>
+			      <%else%>
+			            <%if user !=current_user%>
+			              <span class="label label-warning"><%= link_to "add-as-friend", friendships_path(:friend_id => user.id), :method => :post%></span>
+			            <%end%>
+			       <%end%>
+			</span>
+		<%end%>  
+           
+           	
+
+        </div>
+    </div>
+  <%end%>  
+
+                </div>
+               
+        </div>
+        
+    </div>
+                	
+   <%end%>
+

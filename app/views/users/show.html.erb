@@ -1,27 +1,151 @@
 <% provide(:title, @user.username) %>
 <div class="row">
-	<aside class="span4">
+	<aside class="span3">
 		<section>
 			<h3>
 				<%= gravatar_for @user %>
 				<%= @user.username %>
-				
-				
+       
 			</h3>
-			The user contains <%= pluralize(@user.activities.count, "activity") %>
-		</section>
+
+    <% if signed_in? %>
+ 
+
+      <%if current_user.friendships.find_by_friend_id(@user.id) %>
+            <%if current_user.friendships.find_by_friend_id(@user.id).status == FALSE%>
+               <div class="btn"><p> request already sent</p></div> 
+            <%else%>
+               <div class="btn"><p> friend</p></div>
+               
+              <div class="msg">
+               <%= link_to " send messages", '#', class: "click-link", remote:true%>
+              <div class="gsm"> 
+                 <%= render partial: 'messages/new_message', locals: { message: @message } %>
+              </div>
+            </div>
+            <%end%>      
+      <%elsif current_user.inverse_friendships.find_by_user_id(@user.id) %>
+        <%if current_user.inverse_friendships.find_by_user_id(@user.id).status == FALSE%>
+            <div class="btn"><p> request already sent</p></div>
+        <%else%>
+               <div class="btn"><p> friend</p></div>
+            <div class="msg">
+               <%= link_to " send messages", '#', class: "click-link", remote:true%>
+              <div class="gsm"> 
+                 <%= render partial: 'messages/new_message', locals: { message: @message } %>
+              </div>
+            </div>
+        <% end %>
+      <%else%>
+            <%if @user !=current_user%>
+              <div class="btn"><%= link_to "add-as-friend", friendships_path(:friend_id => @user.id), :method => :post%></div>
+            <%end%>
+       <%end%>
+    <%end%>
+          
+    
+     
+
+    </section>
+  <div class="dfac">
+  <%= link_to "see-friends list", '#', class: "click-link", remote:true%>   
+    <div class="index">
+
+    <%if @user== current_user%>
+           <h3>Friend Requested</h3>
+             <ul>
+                  <% @user.inverse_friendships.each do |inverse_friendship|%>
+
+                    <% if inverse_friendship.status==false%>
+                      <li><%= inverse_friendship.user.username %>
+             
+                        (<%= link_to "accept", friendship_path(inverse_friendship), :method => :put%>)
+                        (<%= link_to "Decline", inverse_friendship_path(inverse_friendship), :method => :delete  %>)
+
+                      </li>
+                    <%end%>
+                  <%end%>
+              </ul>
+    <%end%>
+       <h3>Friends</h3>
+      <ul>
+          <% @user.friendships.each do |friendship| %>
+            <%if friendship.status==true%>
+               <li>
+               <%= link_to (gravatar_for friendship.friend), friendship.friend%>
+               <%=link_to (friendship.friend.username), friendship.friend%>
+                   <% if @user==current_user %>
+                      (<%= link_to "remove", friendship, :method => :delete%>)<hr>
+                    <% end %>
+              </li>
+          <%end%>
+          <%end%>
+          <% @user.inverse_friendships.each do |inverse_friendship| %>
+            <%if inverse_friendship.status==true%>
+               <li>
+               <%= link_to (gravatar_for inverse_friendship.user), inverse_friendship.user %>
+               <%=link_to (inverse_friendship.user.username), inverse_friendship.user%>
+                   <% if @user==current_user %>
+                   (<%= link_to "remove", inverse_friendship_path(inverse_friendship), :method => :delete%>)
+                      
+                    <% end %>
+              </li>
+          <%end%>
+          <%end%>
+      </ul>
+       
+    </div>   
+</div>
+  <span class="whole">
+    
+    <%if @user == current_user%>
+<div class="abcd">
+       <%= link_to "see sent messages", '#', class: "click-link", remote:true%>
+       
+        <div class="message-list">
+            <b>Sent messages</b>
+          <%current_user.friendships.each do |friendship|%>
+          <% friendship.messages.each do |message|%>
+           <div class="all-message">
+             <%=message.message%><br></br>
+             <div class="a">sent by you to...<%= friendship.friend.username%> at <%= time_ago_in_words(message.created_at) %> ago</div>
+           </div>
+           <%end%>
+           <%end%>
+           
+        </div>
+</div>
+<div class="abcd">
+          <%= link_to "see recived messages", '#', class: "click-link", remote:true%>
+        <div class="message-list">
+            <b>recived messages</b>
+          <%current_user.inverse_friendships.each do |inverse_friendship|%>
+          <% inverse_friendship.messages.each do |message|%>
+           <div class="all-message">
+             <%=message.message%><br></br>
+             <div class="a">sent by...<%= inverse_friendship.user.username%> at <%= time_ago_in_words(message.created_at) %> ago</div>
+           </div>
+           <%end%>
+           <%end%>
+           
+        </div>
+</div>
+    <%end%>
 	</aside>
 	</div>
+  
+     <div class="plural-activity">The user contains <%= pluralize(@user.activities.count, "activity") %>...</div>
+      
 
 	<% @activities.each do |activity|%>
-      
+      <div class="activity_partial">
         <div class="span12 offset2 ">
                   <div class="row">
                        <div class="span2">
-                          <%= gravatar_for @user%>
+                          <%= link_to (gravatar_for activity.user), activity.user%>
 
-                           <%=link_to @user.username, user_path(current_user) %>
-
+                           <%=link_to activity.user.username, user_path(activity.user) %>
+                           
                        </div>
 
                        <div class="span4">
@@ -31,18 +155,48 @@
                              <ol><h4>Name:</h4> <%= activity.name%></ol>
 
 
-                       </div>
+                        </div>
                        <ol><h4>Description:</h4> <%=activity.description%></ol>
                   
                   </div>
-                  Posted <%= time_ago_in_words(activity.created_at) %> ago.
-        </div> 
-        <%= will_paginate @activities %>       
-                  
-        
+              <div class="row">
+                <div class="comment-class">
+                    Posted <%= time_ago_in_words(activity.created_at) %> ago.
+                   <%if signed_in?%>
+                    <%= link_to "comment", '#', class: "click-link", remote:true%>
+                    <% end%>
+                 </div>
+              </div>
+     
+            <div class="row">
 
-        
-        <%end%>
+              <div class="comment-create">
+
+             
+                  <% if activity.comments.any? %>
+                    <% activity.comments.each do |comment| %> 
+                             
+                      <%= render partial: 'comments/comment', locals: { comment: comment } %>
+                    <%end%>
+                  <%end%>
+                <% if signed_in? %>
+                  <div class="comm-form">
+            
+                     <%= render partial: 'comments/new_comment', locals: { rahul: activity, comment:@comment} %>
+          
+                  </div>
+                 <%end%> 
+
+                </div>
+            </div>
+            
+        </div> 
+      </div> 
+        <%= will_paginate @activities %>       
+  <%end%>
+ 
+</span>
+
         
      
 	 

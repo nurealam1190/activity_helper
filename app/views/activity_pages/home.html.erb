@@ -12,7 +12,7 @@
       <div class="span6 offset3">
 
         <div class="new-activity-form">
-          <%= render partial: 'activity_pages/new_post_form', locals: { activity: @activity } %>
+          <%= render partial: 'activity_pages/new_post_form', locals: { activity: @activity, comment:@comment } %>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
   <%= will_paginate @activities %>
   <% @activities.each do |rahul|%>
 
-  <%= render partial: 'activity_pages/activity', locals: { nures: rahul} %>
+  <%= render partial: 'activity_pages/activity', locals: { nures: rahul, comment:@comment} %>
 <% end %>
        
   </div>

@@ -2,23 +2,24 @@ class CommentsController < ApplicationController
 	respond_to :html,:xml,:json
 
 	def new
-		
-		
-		
 		@comment=Comment.new
 	end
+
 	def create
-		#raise params.to_yaml
-		@activity = current_user.activities.find(params[:activity_page_id])
-		@comment=@activity.comments.build(params[:comment])
+	
+
+		@user=User.find_by_username(params[:user_id])
+		@activity=@user.activities.find(params[:activity_page_id])
+		@comment=@activity.comments.build(params[:comment])	
+
 		@comment.user=current_user
 		if @comment.save
-			 @comments=Comment.all
+			 @comments=@activity.comments.all
 			respond_with do |format|
 				format.html do
 					if request.xhr?
 
-						render partial: 'comments/comment', layout: false, status: :created, locals: {rahul: @activity}
+						render partial: 'comments/comment', layout: false, status: :created, locals: {comment:@comments.first}
 					end
 				end
 			end
@@ -27,7 +28,7 @@ class CommentsController < ApplicationController
 			respond_with do |format|
 				format.html do 
 					if request.xhr?
-						render partial: 'comments/new_comment', layout: false, status: :error, locals: { comment: @comment }
+						render partial: 'comments/new_comment', layout: false, status: :error, locals: {rahul: @activity, comment: @comment }
 					end
 				end
 			end

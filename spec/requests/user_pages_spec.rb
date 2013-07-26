@@ -1,76 +1,64 @@
- require 'spec_helper'
+require 'spec_helper'
 
-  describe "UserPages" do
+describe "UserPages" do
+  subject { page }
+  let(:user) { FactoryGirl.create(:user) }
+  before { sign_in user }
+  describe "Activity creation page" do
+    
+    let!(:a1) { FactoryGirl.create(:activity, user: user) }
+    let!(:a2) { FactoryGirl.create(:activity, user: user) }
+    before { visit root_path }
+    it { should have_title("ActivityHelper") }
+      describe "activities" do
+        it {should_not have_content("Welcome to the Activity")}
+        it {should have_link("Sign out")}
+        it { should have_content(a1.name) }
+        it { should have_content(a2.name) }
+        it { should have_content(a1.category) }
+        it { should have_content(a2.category)}
+        it { should have_content(a1.description)}
+        it { should have_content(a2.description)}
+      end
+      describe "profile page" do 
+        before { visit user_path(user) }
+       # it { should have_content(user.name)}
+        it { should have_content(user.activities.count)}
+        it { should have_content(a1.name)}
+        it { should have_content(a2.name)}
+        it { should have_content(a1.category)}
+        it { should have_content(a2.category)}
+        it { should have_content(a1.description)}
+        it { should have_content(a2.description)}
+      end
+      describe "with invalid information", :js=> true do  
+      
 
-
-
-
-	   subject { page }
-
-     let(:user) { FactoryGirl.create(:user) }
-
-     before { sign_in user }
-     
-     
-
-
-      describe "Activity creation page" do
-   
-
-        let!(:a1) { FactoryGirl.create(:activity, user: user) }
-        let!(:a2) { FactoryGirl.create(:activity, user: user) }
-
-               before { visit root_path }
-              it { should have_title("ActivityHelper") }
-       
-        describe "activities" do
-            it {should_not have_content("Welcome to the Activity")}
-            it {should have_link("Sign out")}
-           it { should have_content(a1.name) }
-           it { should have_content(a2.name) }
-           it { should have_content(a1.category) }
-           it { should have_content(a2.category)}
-           it { should have_content(a1.description)}
-           it { should have_content(a2.description)}
+        it "should not create a activity" do
+          expect { click_button "Post" }.not_to change(Activity, :count)
         end
-        describe "profile page" do 
-          before { visit user_path(user) }
-           it { should have_content(user.name)}
-           it { should have_content(user.activities.count)}
-           it { should have_content(a1.name)}
-           it { should have_content(a2.name)}
-           it { should have_content(a1.category)}
-           it { should have_content(a2.category)}
-           it { should have_content(a1.description)}
-           it { should have_content(a2.description)}
-
+        describe "error messages" do
+          before { click_button "Post" }
+          it { should have_content('error') } 
         end
+      end
+
+      describe "with valid information", :js=> true  do
         
-
-         describe "with invalid information", :js=>true do
-
-            it "should not create a activity" do
-              expect { click_button "Post" }.not_to change(Activity, :count)
-             end
-             describe "error messages" do
-                before { click_button "Post" }
-                it { should have_content('error') } 
-              end
-          end
-
-        describe "with valid information", :js=>true do
-
-            before do 
-              select "Sports", from: "Category"
-             fill_in "Name", with: "cricket" 
-             fill_in "Description", with: "hi"
-             click_button "Post"
-           end
-            it { should have_content("cricket") }
-               # expect { click_button "Post" }.to change(Activity, :count).by(1)
-            # end
+        before do 
+         select "Sports", from: "Category"
+         fill_in "Name", with: "cricket" 
+         fill_in "Description", with: "hi"
+         click_button "Post"
         end
-    end
+        it { should have_content("cricket") }
+             # expect { click_button "Post" }.to change(Activity, :count).by(1)
+            # end
+      end
+  end
+end
+
+
 
 # 	describe "signup page" do
 
@@ -115,4 +103,3 @@
         
      
 
-end
