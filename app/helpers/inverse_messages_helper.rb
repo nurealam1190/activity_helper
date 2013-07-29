@@ -1,0 +1,2 @@
+module InverseMessagesHelper
+end

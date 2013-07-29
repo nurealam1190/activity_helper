@@ -38,10 +38,15 @@
         <% end %>
       <%else%>
             <%if @user !=current_user%>
-              <div class="btn"><%= link_to "add-as-friend", friendships_path(:friend_id => @user.id), :method => :post%></div>
+
+               <%=form_for :friendship, url:friendships_path(:friend_id => @user.id), :method => :post do |f| %>
+                <%=f.submit "add-as-friend" %>
+                <%end%>
+                
             <%end%>
        <%end%>
-    <%end%>
+        <%end%>
+   
           
     
      
@@ -59,7 +64,7 @@
                     <% if inverse_friendship.status==false%>
                       <li><%= inverse_friendship.user.username %>
              
-                        (<%= link_to "accept", friendship_path(inverse_friendship), :method => :put%>)
+                        (<%= link_to "Accept", friendship_path(inverse_friendship), :method => :put%>)
                         (<%= link_to "Decline", inverse_friendship_path(inverse_friendship), :method => :delete  %>)
 
                       </li>
@@ -75,7 +80,7 @@
                <%= link_to (gravatar_for friendship.friend), friendship.friend%>
                <%=link_to (friendship.friend.username), friendship.friend%>
                    <% if @user==current_user %>
-                      (<%= link_to "remove", friendship, :method => :delete%>)<hr>
+                      (<%= link_to "remove", friendship, :method => :delete%>)<hr><hr>
                     <% end %>
               </li>
           <%end%>
@@ -86,7 +91,7 @@
                <%= link_to (gravatar_for inverse_friendship.user), inverse_friendship.user %>
                <%=link_to (inverse_friendship.user.username), inverse_friendship.user%>
                    <% if @user==current_user %>
-                   (<%= link_to "remove", inverse_friendship_path(inverse_friendship), :method => :delete%>)
+                   (<%= link_to "remove", inverse_friendship_path(inverse_friendship), :method => :delete%>)<hr>
                       
                     <% end %>
               </li>

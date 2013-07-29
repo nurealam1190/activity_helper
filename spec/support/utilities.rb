@@ -8,10 +8,10 @@ def sign_in(user)
   # Sign in when not using Capybara as well.
   #cookies[:remember_token] = user.remember_token
 end
-# def sign_in(user)
-#         #cookies.permanent[:remember_token] = user.remember_token
+ #def sign_in(user)
+        #cookies.permanent[:remember_token] = user.remember_token
 #         self.current_user = user
-#     end
+#    end
 
 
 

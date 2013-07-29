@@ -25,10 +25,7 @@ describe "Friendship" do
     before { @friendship.friend_id = nil }
     it { should_not be_valid }
   end
-  describe "when status is not present" do
-    before { @friendship.status = nil }
-    it { should_not be_valid }
-  end
+ 
   
   
   

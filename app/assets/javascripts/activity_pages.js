@@ -26,7 +26,7 @@ $(document).ready(function(){
 
      // for prepend the comment and clear the fields
 	$(document).on("ajax:success","#create_comment_form",function(evt, data, status, xhr){
-		alert(xhr.responseText);
+		//alert(xhr.responseText);
      $(this).closest('.comment-create').prepend(xhr.responseText);
 
          var el = $('#create_comment_form');
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	});
      // for cheking error in comment
 	$(document).on("ajax:error","#create_comment_form",function(evt, xhr, status, error){
-		alert(xhr.responseText);
+		//alert(xhr.responseText);
       $(this).closest('.comment-form').replaceWith(xhr.responseText);
 	});
 

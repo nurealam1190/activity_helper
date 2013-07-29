@@ -7,6 +7,7 @@ ActivityHelper::Application.routes.draw do
   end     
   resources :friendships
   resources :messages
+  resources :inverse_messages
   resources :inverse_friendships
   resources :users do 
   
