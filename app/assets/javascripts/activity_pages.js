@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 	   // $('#create_activity_form').change(function(){
              el.find('.myselect option').prop('selected',false);
-       });
+    });
 
      // for cheking error in activity creation
 	$(document).on("ajax:error","#create_activity_form",function(evt, xhr, status, error){

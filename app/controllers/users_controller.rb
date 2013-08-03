@@ -22,6 +22,8 @@ class UsersController < ApplicationController
     @user=User.all
       
   end
+  def htm
+  end
   
   private
     def signed_in_user

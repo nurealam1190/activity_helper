@@ -3,7 +3,7 @@
 	<aside class="span3">
 		<section>
 			<h3>
-				<%= gravatar_for @user %>
+				<%= gravatar_for @user,size:120 %>
 				<%= @user.username %>
        
 			</h3>
@@ -52,7 +52,7 @@
      
 
     </section>
-  <div class="dfac">
+   <div class="dfac">
   <%= link_to "see-friends list", '#', class: "click-link", remote:true%>   
     <div class="index">
 
@@ -109,14 +109,15 @@
        
         <div class="message-list">
             <b>Sent messages</b>
-          <%current_user.friendships.each do |friendship|%>
-          <% friendship.messages.each do |message|%>
+          <% current_user.messages.each do |message|%>
+          
            <div class="all-message">
              <%=message.message%><br></br>
-             <div class="a">sent by you to...<%= friendship.friend.username%> at <%= time_ago_in_words(message.created_at) %> ago</div>
+             <% user=User.find(message.recipient_id)%>
+             <div class="a">sent by you to...<%= user.username %> at <%= time_ago_in_words(message.created_at) %> ago</div>
            </div>
            <%end%>
-           <%end%>
+           
            
         </div>
 </div>
@@ -124,14 +125,14 @@
           <%= link_to "see recived messages", '#', class: "click-link", remote:true%>
         <div class="message-list">
             <b>recived messages</b>
-          <%current_user.inverse_friendships.each do |inverse_friendship|%>
-          <% inverse_friendship.messages.each do |message|%>
+          <%current_user.inverse_messages.each do |inverse_message|%>
+          <%reciver=User.find(inverse_message.user_id)%>
            <div class="all-message">
-             <%=message.message%><br></br>
-             <div class="a">sent by...<%= inverse_friendship.user.username%> at <%= time_ago_in_words(message.created_at) %> ago</div>
+             <%=inverse_message.message%><br></br>
+             <div class="a">sent by...<%= reciver.username %> at <%= time_ago_in_words(inverse_message.created_at) %> ago</div>
            </div>
            <%end%>
-           <%end%>
+           
            
         </div>
 </div>
@@ -206,3 +207,4 @@
      
 	 
 
+ 

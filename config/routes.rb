@@ -4,10 +4,13 @@ ActivityHelper::Application.routes.draw do
   
   devise_for :users, :controllers=> { :registrations=> "users/registrations" } do 
       get "/users/sign_out" => "devise/sessions#destroy"
-  end     
+  end 
+   get "/messages/get_friends"    
   resources :friendships
+   match '/messages/conversation', to: 'messages#conversation', via: [:get]
   resources :messages
-  resources :inverse_messages
+  
+  
   resources :inverse_friendships
   resources :users do 
   
@@ -17,9 +20,13 @@ ActivityHelper::Application.routes.draw do
           resources :comments, only: [:new, :create, :show]
         end
   end
+ 
   #get '/:name' => 'users#show', :constrain => { :name => /[a-zA-Z]+/}
   #match '/activities', to: 'activities#create', via: [:POST]
   get "activity_pages/home"
+
+
+ 
   #get "activity_pages/activity"
 
   match '/activity_pages/activity', to: 'activity_pages#activity', via: [:get]

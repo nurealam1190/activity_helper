@@ -1,0 +1,6 @@
+<%=form_for :message, url:messages_path(recipient_id: friend_id), remote: true, html: {id: "create_new_message_form"} do |f| %>
+			                
+			<%= f.text_area :message, class: "message-form2", placeholder: "send new message..."%>
+		    <%=f.submit "Send", class: "btn btn-primary btn-large"%>
+
+<%end%>

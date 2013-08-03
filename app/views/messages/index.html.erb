@@ -1,0 +1,93 @@
+<% provide(:title, 'messages') %>
+<%if signed_in?%>
+ <div class="container">
+		<span class="span3 list-messager">
+		    <div class="list-group">
+		       <h3>Friends</h3>
+
+		        <% current_user.friendships.each do |friendship|%>
+                    <%if friendship.status==true%>
+			            <ol>
+						    <div class="replace">   
+							    <%= link_to (gravatar_for friendship.friend), "/messages/conversation?param1=#{friendship.friend.id}", remote: true,  class: "mnp" %>
+			                    <%= link_to (friendship.friend.username), "/messages/conversation?param1=#{friendship.friend.id}", remote: true %>
+	                            
+	                             <span class="total">T<%=current_user.inverse_messages.where(user_id: friendship.friend.id).count+current_user.messages.where(recipient_id:friendship.friend.id).count%></span>
+	                             <span class="unread">U<%=current_user.inverse_messages.where(user_id: friendship.friend.id, status: false).count%></span>
+	                        </div>     
+                        
+		                    
+		                 </ol><hr>
+		            <%end%>
+				<%end%>
+				<%current_user.inverse_friendships.each do |inverse_friendship|%>
+				    <%if inverse_friendship.status==true%> 
+					    <ol>
+					    <div class="replace">
+							<%= link_to (gravatar_for inverse_friendship.user), "/messages/conversation?param1=#{inverse_friendship.user.id}", remote: true, class: "mnp"%>
+
+						    <%= link_to (inverse_friendship.user.username),  "/messages/conversation?param1=#{inverse_friendship.user.id}", remote: true  %>
+						   <!--  <%= inverse_friendship.user.id %> -->
+							<span class="total">T<%=current_user.inverse_messages.where(user_id: inverse_friendship.user.id).count+current_user.messages.where(recipient_id: inverse_friendship.user.id).count%></span>
+							<span class="unread">U<%= current_user.inverse_messages.where(user_id: inverse_friendship.user.id, status: false).count%></span> 
+                        </div>   
+						</ol><hr>
+					<%end%>
+				<%end%>
+			</div>
+        </span>
+		    <span class="span8 conversation">
+		        <div class="conv">Messages</div><hr>
+                <div class="converge">
+                    <%current_user.friendships.each do |friendship|%>
+                        <%if friendship.status==true%>
+                            <%inverse_message = current_user.inverse_messages.where(user_id:friendship.friend.id, status: false)%>
+                            <%if inverse_message.any?%>
+                                <div class="user-name">new message from <%= friendship.friend.username%></div>
+                                <%inverse_message.each do |message|%>
+
+				                        <div class="remain-message">
+				                            <%= gravatar_for friendship.friend%>
+				                        	<%= message.message%>
+				                        	<div class="time">sent <%= time_ago_in_words(message.created_at) %> ago.</div>
+				                        </div>
+				                <%end%>
+                            <%end%>
+                        <%end%>
+                            
+                    <%end%>   
+                    <%current_user.inverse_friendships.each do |inverse_friendship|%>
+                        <%if inverse_friendship.status==true%>
+                            <%inverse_message = current_user.inverse_messages.where(user_id:inverse_friendship.user.id, status: false)%>
+                            <%if inverse_message.any?%>
+                                <div class="user-name"><%= inverse_friendship.user.username%></div>
+                                <%inverse_message.each do |message|%>
+
+				                        <div class="remain-message">
+				                            <%= gravatar_for inverse_friendship.friend%>
+				                        	<%= message.message%>
+				                        	<div class="time">sent <%= time_ago_in_words(message.created_at) %> ago.</div>
+				                        </div>
+				                <%end%>
+                            <%end%>
+                        <%end%>
+                            
+                    <%end%>   
+               
+               
+				
+	                <div class="new-message">
+					    <%=form_for :message, remote: true, html: {id: "new-form-msg"} do |f| %>
+			                
+			                <%= f.text_area :message, class: "message-form3  typeahead ", placeholder: "send new message..."%>
+			                <%=f.submit "Send", class: "btn btn-primary btn-large message-submit"%>
+			            <%end%>
+			        </div>
+			    </div>
+			        
+		    </span>
+		   
+		    
+ </div>
+<%end%>
+

@@ -12,6 +12,13 @@ describe "user"  do
 	it { should respond_to(:name)}
   it { should respond_to(:activities)}
   it { should respond_to(:username)}
+  it { should respond_to(:messages)}
+  it { should respond_to(:recipients)}
+  it { should respond_to(:senders)}
+  it { should respond_to(:friendships)}
+  it { should respond_to(:inverse_friendships)}
+  it { should respond_to(:friends)}
+  it { should respond_to(:inverse_friends)}
 
 	it { should be_valid }
 

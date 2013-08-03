@@ -5,14 +5,19 @@
           
             
         <ul class="nav pull-right">
+               <li><%link_to '<i class="icon-user icon-white"></i> jh'.html_safe, '#' %></li>
                <li> 
                   <%= form_tag "#", :class=>"form-search" do %>
                   <%= text_field_tag 'search-box', nil, :class=>"input-medium search-query", placeholder: 'search here' %>
                   <%= submit_tag  'search', :id=>"submit" %>
                   <%end%></li>
-
+                
                 <li><%= link_to "Register/Sign-up", new_user_registration_path %></li>
                 <li><%= link_to "Activity", activity_pages_activity_path %></li>
+
+               
+                
+                
                   
 
               <% if !current_user %>
@@ -20,9 +25,42 @@
                 
                      
             <% else %>
-            <li><%= link_to "profile", user_path(current_user)%></li>
-            <li> <%= link_to "Sign out", destroy_user_session_path, method: "delete" %><li>
+             <li><%=link_to '<i class="icon-user icon-white"></i> '.html_safe, '#' %></li>
+                <li><%=link_to '<i class="icon-envelope icon-white"></i> '.html_safe, '#' %>
+                <span class="instant-message"><%=current_user.inverse_messages.where(status: false).count%></span>
+                </li>
+
+               
+                
+                <li><%=link_to '<i class="icon-globe icon-white"></i> '.html_safe, '#' %></li>
+           
               
+              <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  User <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><%= link_to '<i class="icon-user  "></i>   profile'.html_safe, user_path(current_user)%></li>
+                    <li class="divider"></li>
+                    <li><%= link_to '<i class="icon-envelope "></i>   Messages'.html_safe, messages_path %></li>
+                    <li class="divider"></li>
+                    <li><%=link_to '<i class="icon-user"></i>Find friends'.html_safe, users_path %></li>
+                     <li class="divider"></li>
+                    <li><%=link_to '<i class="icon-wrench"></i>   Setting'.html_safe, '#'%></li>
+                    
+
+                 
+                    <li class="divider"></li>
+                  
+                    <li> <%= link_to '<i class="icon-off"></i>   Sign out'.html_safe, destroy_user_session_path, method: "delete" %><li>
+                </ul>
+              </div>
+                 
+                  
+              
+            </li>
+            
+
                    
                    
               <% end %>

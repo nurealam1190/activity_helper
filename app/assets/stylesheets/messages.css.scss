@@ -1,3 +1,107 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.span12{
+
+     height:100%;
+	border:1px solid black;
+}
+.span3{
+	height: 50%;
+	
+}
+.list-messager{
+
+  
+  
+  background-color: white;
+  border:1px solid red;
+}
+.conversation{
+
+	background-color: white;
+	border:1px solid red;
+	margin-top:0px;
+}
+.msg-form{
+	padding-top: 322px;
+	padding-right: 100px;
+	
+	
+}
+.message-form2{
+	width:520px;
+	margin-top:0px;
+    
+
+
+}
+.message-form3{
+	width:520px;
+	margin-top:3px;
+	padding-top:0px;
+    
+
+
+}
+.message-submit{
+	margin-top:27px;
+}
+
+
+.user-name{
+	text-align:center;
+	font-size:22px;
+}
+.remain-message{
+	width:100%;
+	margin-top:5px;
+	
+	height:70px;
+	background-color:green;
+	color:white;
+	border:1px solid blue;
+	font-size:20px;
+}
+.time{
+	color:red;
+	font-size:15px;
+}
+
+.msg-from{
+	width:100%;
+	height:50px;
+	background-color:gray;
+	margin-top:20px;
+	font-size:22px;
+	border:1px solid blue;
+}
+.my-img{
+	float:right;
+}
+.conv{
+	text-align: center;
+	font-size: 25px;
+}
+.total{
+	height:15px;
+	width:15px;
+	background-color: green;
+
+}
+.unread{
+	height:15px;
+	width:15px;
+	background-color: red;
+	
+}
+.template{
+	height:35px;
+	margin-right:10px;
+}
+.instant-message{
+	color:red;
+	margin-top:0px;
+	margin-left: 0px;
+}

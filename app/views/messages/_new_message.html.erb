@@ -1,5 +1,5 @@
-<%=form_for :message, url:messages_path(user_id:current_user, friendship_id:current_user.friendships.find_by_friend_id(@user.id)) || current_user.inverse_friendships.find_by_user_id(@user.id) do |f| %>
+<%=form_for :message, url:messages_path(user_id: current_user, recipient_id: @user.id) do |f| %>
    <%= render partial:'shared/new_message_error', locals:{ message: message } %>
                   <%= f.text_area :message, class: "message-form", placeholder: "send new message..."%>
                   <%=f.submit "Send", class: "btn btn-primary"%>
-<%end%>
+<% end %>

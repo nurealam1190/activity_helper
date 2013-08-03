@@ -1,0 +1,21 @@
+<div class="converge">
+    
+	<%messages.each do |message|%>
+		<div class="msg-from">
+		    <%=link_to (gravatar_for User.find(message.user_id)), message.user%>
+			<%=message.message%>
+			<%=link_to (gravatar_for User.find(message.recipient_id)), User.find(message.recipient_id), class: "my-img" %>
+			              
+		</div>
+		Sent <%= time_ago_in_words(message.created_at) %> ago.
+		<%=link_to "delete", message_path(message.id, friend_id: friend_id), remote: true, :method => :delete %>
+	<%end%>
+
+	<div class="new-message">
+		<%=form_for :message, url:messages_path(recipient_id: friend_id), remote: true, html: {id: "create_new_message_form"} do |f| %>
+			                
+			<%= f.text_area :message, class: "message-form2", placeholder: "send new message..."%>
+		    <%=f.submit "Send", class: "btn btn-primary btn-large"%>
+	    <%end%>
+	</div>
+</div>

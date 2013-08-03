@@ -1,0 +1,15 @@
+<div class="container">
+		<span class="span8 conversation">
+		    <div class="conv">Messages</div><hr>
+		    <%@allmessages.each do |message|%>
+				<div class="msg-from">
+				        <%=link_to (gravatar_for User.find(message.user_id)), message.user%>
+		                <%=message.message%>
+		                <%=link_to (gravatar_for User.find(message.recipient_id)), User.find(message.recipient_id), class: "my-img" %>
+		              
+		        </div>
+		    <%end%>
+		   
+		    
+		</span>
+</div>

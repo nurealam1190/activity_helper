@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :activities
   has_many :comments, through: :activities
+  has_many :messages
+  has_many :recipients, through: :messages
+  has_many :inverse_messages, class_name: "Message", foreign_key: "recipient_id"
+  has_many :senders, through: :inverse_messages, :source => :user
 
   def to_param
     username

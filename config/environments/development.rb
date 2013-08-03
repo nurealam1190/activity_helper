@@ -40,7 +40,7 @@ ActivityHelper::Application.configure do
     :user_name            => 'bigcolors@akaruilabs.com',
     :password             => '123admin',
     :authentication       => :login,
-    :enable_starttls_auto => true 
+    :enable_starttls_auto => true
      }
 
 

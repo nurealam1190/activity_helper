@@ -6,19 +6,22 @@ describe "Message" do
      
     before do
 
-    @friendship=user1.friendships.build(:friend_id => user2.id)
+    @friendship=user1.friendships.build(:friend_id => user2.id, status: true)
     @friendship.save!
-		@message= @friendship.messages.build(:message => "hi")
+		@message= user1.messages.build(:message => "hi", recipient_id: user2.id)
+        @message.save!
 	
     end 
     subject { @message }
 
     it { should respond_to(:message)}
-    it { should respond_to(:friendship_id)}
+    it { should respond_to(:recipient_id)}
+    it { should respond_to(:friendship)}
+    it { should respond_to(:user_id)}
     it { should  be_valid}
 
-    describe "when friendship_id is not present" do
-      before { @message.friendship_id = nil }
+    describe "when recipient_id is not present" do
+      before { @message.recipient_id = nil }
       it { should_not be_valid }
     end
     describe "when message is not present" do
