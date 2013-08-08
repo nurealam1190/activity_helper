@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships
 	has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, :uniqueness => true, length: { maximum: 30 }
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :activities
+  has_many :activities, dependent: :destroy
   has_many :comments, through: :activities
   has_many :messages
   has_many :recipients, through: :messages

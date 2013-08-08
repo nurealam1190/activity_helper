@@ -5,6 +5,6 @@ class Activity < ActiveRecord::Base
     validates :name, presence: true
     validates :category, presence: true
 	belongs_to :user
-	has_many :comments
+	has_many :comments, dependent: :destroy
 	default_scope order: 'activities.created_at DESC'
 end

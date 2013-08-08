@@ -17,6 +17,7 @@
   
   background-color: white;
   border:1px solid red;
+  
 }
 .conversation{
 
@@ -38,15 +39,19 @@
 
 }
 .message-form3{
-	width:520px;
+	width:500px;
 	margin-top:3px;
 	padding-top:0px;
+
     
 
 
 }
 .message-submit{
-	margin-top:27px;
+	margin-top:5px;
+}
+.msg-sub{
+	margin-bottom:10px;
 }
 
 
@@ -105,3 +110,4 @@
 	margin-top:0px;
 	margin-left: 0px;
 }
+

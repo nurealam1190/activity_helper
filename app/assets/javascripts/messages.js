@@ -27,17 +27,26 @@ $(document).ready(function(){
       el.find('input:text,textarea').val('');
      });
 
-   $('.message-form3').typeahead({
+    //$(".message-form3").keyup(function(){
+      // alert("hello");
+
+       $('.message-form3').text('@').typeahead({
       name: 'friends',
      
       remote:'/messages/get_friends?q=%QUERY',
       header: '<center><h3 class="Users-name">Users Name</h3></center>',
-      template: " <img class='template' src={{image}}> {{value}}",
+      template: '<img class="template" src={{image}}/> {{text}}',
+
       engine: Hogan
-     
+
+    
       //local: ["india", "indonesia","america","australia"]
       
-    });
+      });
+      
+   //}); 
+
+  
 
 
 

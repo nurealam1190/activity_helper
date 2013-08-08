@@ -1,0 +1,41 @@
+<div class="hero-unit what">
+
+  <div class="row">
+  	<%=gravatar_for current_user,size:120%>
+  	<%=current_user.username%>
+  	<%=link_to "Add-as-friends", '#', class: "btn  btn-primary frnd-req"%>
+  	<%=link_to "Send-message", '#', class: "btn  btn-primary frnd-req"%>
+  	<hr class="hr">
+  	    
+		<span class=" span2 links">
+     <%=link_to "see-send-messages", '#'%>
+		  		
+		</span>
+		<span class="span10 personal-activity">
+
+		  	
+          <div class="row">
+            <div class="span2">
+               <%=gravatar_for current_user, size:100%><br>
+               <%=current_user.username%>
+            </div>
+            <div class="span4">
+              <ol><h4>Category:</h4>iiuououou90u90</ol> 
+              <ol><h4>Name:</h4> </ol>
+            </div>
+
+               <ol><h4>Description:</h4> </ol>
+          </div>
+          <div class="row">
+            <div class="comment-class">
+              Posted  ago.
+
+              <%= link_to "comment", '#', class: "click-link", remote:true%>
+            </div>
+          </div>
+        </span>
+
+	</div>
+</div>
+
+

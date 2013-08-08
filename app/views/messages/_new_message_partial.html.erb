@@ -1,0 +1,8 @@
+<div class="msg-from" data-time="<%= message.created_at.to_i %>">
+		    <%=link_to (gravatar_for User.find(message.user_id)), message.user%>
+			<%=message.message%>
+			<%=link_to (gravatar_for User.find(message.recipient_id)), User.find(message.recipient_id), class: "my-img" %>
+			              
+</div>
+	Sent <%= time_ago_in_words(message.created_at) %> ago.
+	<%=link_to "delete", message_path(message.id, friend_id: friend_id), remote: true, :method => :delete %>

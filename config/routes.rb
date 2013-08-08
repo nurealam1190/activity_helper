@@ -8,6 +8,8 @@ ActivityHelper::Application.routes.draw do
    get "/messages/get_friends"    
   resources :friendships
    match '/messages/conversation', to: 'messages#conversation', via: [:get]
+   match '/users/user', to: 'users#user', via: [:get]
+   match '/users/indexes', to: 'users#indexes', via: [:get]
   resources :messages
   
   

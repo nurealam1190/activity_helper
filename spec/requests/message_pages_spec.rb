@@ -38,6 +38,8 @@ describe "MessagePages", :js => true do
 
 	    describe "message creation" do 
 	    	before do 
+	    		
+	    		visit user_path(user2)
 	    		 click_on("send messages")
 	    	end
 	    	it { should have_button("Send")}

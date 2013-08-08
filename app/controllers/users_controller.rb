@@ -22,7 +22,11 @@ class UsersController < ApplicationController
     @user=User.all
       
   end
-  def htm
+  def user
+  end
+  def indexes
+     @user=User.all
+     #raise @user.to_yaml
   end
   
   private

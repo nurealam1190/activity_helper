@@ -1,0 +1,2 @@
+alert("comments go here.");
+$(".converge").prepend("<%= escape_javascript(render partial: "messages/new_message_partial", locals: {message:  @messages, friend_id: @friend_id })%>");

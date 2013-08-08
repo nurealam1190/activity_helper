@@ -27,7 +27,7 @@
             <% else %>
              <li><%=link_to '<i class="icon-user icon-white"></i> '.html_safe, '#' %></li>
                 <li><%=link_to '<i class="icon-envelope icon-white"></i> '.html_safe, '#' %>
-                <span class="instant-message"><%=current_user.inverse_messages.where(status: false).count%></span>
+                <!-- <span class="instant-message"><%=current_user.inverse_messages.where(status: false).count%></span> -->
                 </li>
 
                

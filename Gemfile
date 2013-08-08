@@ -5,7 +5,6 @@ gem 'rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'therubyracer'
 gem 'devise', '3.0.0.rc'
@@ -13,23 +12,21 @@ gem 'protected_attributes'
 gem 'factory_girl_rails'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
-
+gem 'rspec-rails'
 
 
 group :development do
 	gem 'sqlite3'
-	gem 'rspec-rails'
 end
 group :test do
 	gem 'capybara'
 	gem 'selenium-webdriver'
 	gem 'database_cleaner'
 end
+group :production do 
+	gem 'pg'
+end
 
-
-
-
-#map { |e|  }
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

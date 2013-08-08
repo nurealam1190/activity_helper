@@ -17,4 +17,20 @@
 //= require compiler.js
 //= require bootstrap
 
+
 //= require_tree .
+// $(function(){
+//   if ($(."converge").length > 0){
+//   	setTimeout(updateMessage, 10000);
+//   }
+// });
+$(document).on("click", ".mnp",function(){
+            alert("hello");
+    setTimeout(updateMessage, 5000);
+    } );
+function updateMessage(){
+	var friendship_id = $(".converge").attr("data-id");
+	var after = $(".msg-from:first-child").attr("data-time");
+	$.getScript("/messages.js?user_id=" + friendship_id + "&after=" + after);
+	setTimeout(updateMessage, 5000);
+}

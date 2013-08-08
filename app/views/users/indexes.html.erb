@@ -1,0 +1,33 @@
+<% provide(:title, '| all-users') %>
+ 
+<div class="hero-unit what">
+  
+        <div class="row">
+    
+               
+	            
+	                <%@user.each do |user|%>
+		                <span class="span12 pers-act">
+		                   <div class="row">
+					            <div class="span2 gravt">
+
+					               <%=link_to (gravatar_for user, size:90), user%><br>
+					                <div class="cent"><%=link_to (user.username), user%></div>
+					            </div>
+					            <div class="span4 gravta">
+              
+                                  <br><div class="center center-all"><%=user.email%></div>
+                                 </div>
+                                 
+					        </div>
+
+						</span>
+				    <%end%>		
+						
+			    		
+		</div>
+				
+				    
+			   
+    
+</div>
